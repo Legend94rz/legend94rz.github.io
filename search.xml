@@ -4,19 +4,36 @@
   
     
     <entry>
-      <title>Hello World</title>
-      <link href="/2020/02/26/hello-world/"/>
-      <url>/2020/02/26/hello-world/</url>
+      <title>矩阵增量式求逆</title>
+      <link href="/2020/03/15/ju-zhen-zeng-liang-shi-qiu-ni/"/>
+      <url>/2020/03/15/ju-zhen-zeng-liang-shi-qiu-ni/</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="动机">动机</h2><p><span class="math display">\[\left[ \begin{array}{cc}A &amp; B \newlineC &amp; D \newline\end{array} \right]=\left[ \begin{array}{cc}A &amp; B \newlineC &amp; D \newline\end{array} \right]\]</span></p><p><span class="math display">\[\begin{aligned}\dot{x} &amp; = \sigma(y-x) \\\dot{y} &amp; = \rho x - y - xz \\\dot{z} &amp; = -\beta z + xy\end{aligned}\]</span></p><h2 id="背景知识">背景知识</h2><h2 id="如何做">如何做</h2><h2 id="参考文献">参考文献</h2><p>https://www.zhihu.com/question/47760591 1814-incremental-and-decremental-support-vector-machine-learning http://www.cs.ubbcluj.ro/~csatol/SOGP/thesis/Iterative_computation.html</p>]]></content>
       
       
       
         <tags>
             
-            <tag> a-tag </tag>
+            <tag> math </tag>
             
-            <tag> two-tag </tag>
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Python的GIL</title>
+      <link href="/2020/03/15/python-de-gil/"/>
+      <url>/2020/03/15/python-de-gil/</url>
+      
+        <content type="html"><![CDATA[<p>GIL全称Python Global Interpreter Lock，全局解释器锁。</p><h2 id="gil解决的问题">GIL解决的问题</h2><p>为了维护 python 变量的引用计数，该引用计数将用于垃圾收集。 同一进程内，多个解释器同时更新引用计数将产生竞争条件（race condition）。 在执行python字节码时需要保证线程安全。 <a id="more"></a></p><h2 id="为何选择gil作为解决方案">为何选择GIL作为解决方案</h2><ol type="1"><li>在操作系统还没有线程概念的时候，Python就已经出现了；</li><li>能提供线程安全的内存管理（垃圾收集）；</li><li>易于实现，是python早期的设计者们所采用的解决复杂问题的简单方法。</li></ol><h2 id="gil带来的问题">GIL带来的问题</h2><p>GIL的直接结果就是一个python进程只有一个解释器，从而导致一个python进程的多线程部分只能有一个解释器真正在执行。 对于CPU密集型任务，无法利用多核进行计算加速。</p><h2 id="如何避免">如何避免</h2><ol type="1"><li><p>使用多进程而不是多线程。即：使用multiprocessing库而不是自带的threading。前者启的是进程，后者启的是线程。</p></li><li><p>换用其他的py解释器。IronPython没有GIL。</p></li></ol><h2 id="参考">参考</h2><p>https://realpython.com/python-gil/</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> python </tag>
             
         </tags>
       
