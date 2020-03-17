@@ -5,7 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Python的GIL, MachineLearning,DeepLearning">
-    <meta name="description" content="行百里者半九十">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Python的GIL | One Blog</title>
+    <title>Python的GIL | 学而</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -26,10 +26,36 @@
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style>.tk-source-han-sans-traditional{font-family:"source-han-sans-traditional",sans-serif;}.tk-source-han-serif-tc{font-family:"source-han-serif-tc",serif;}</style>
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif&display=swap" rel="stylesheet">
 
     <script src="/libs/jquery/jquery.min.js"></script>
     
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="One Blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/vs.min.css">
+        <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    
+
+    
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        jinrishici.load(function(result) {
+            var author = document.querySelector("#poem_author")
+            var title = document.querySelector("#poem_title")
+            var content = $('#poem_content')
+            title.innerHTML = result.data.origin.title
+            author.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author
+            full = result.data.origin.content
+            for(var i=0;i<full.length;i+=2){
+                var sent = full[i]
+                if (i+1 < full.length)
+                    sent+=full[i+1]
+                content.append("<p>"+sent+"</p>")
+            }
+        });
+    </script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="学而" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
@@ -42,7 +68,7 @@
                     
                     <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">One Blog</span>
+                    <span class="logo-span">学而</span>
                 </a>
             </div>
             
@@ -129,10 +155,10 @@
         
         <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">One Blog</div>
+        <div class="logo-name">学而</div>
         <div class="logo-desc">
             
-            行百里者半九十
+            Never really desperate, only the lost of the soul.
             
         </div>
     </div>
@@ -219,6 +245,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '../../../../index.html';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -367,14 +406,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-16
+                    2020-03-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    294
+                    347
                 </div>
                 
 
@@ -399,8 +438,8 @@
             <div id="articleContent">
                 <p>GIL全称Python Global Interpreter Lock，全局解释器锁。</p>
 <h2 id="gil解决的问题">GIL解决的问题</h2>
-<p>为了维护 python 变量的引用计数，该引用计数将用于垃圾收集。 同一进程内，多个解释器同时更新引用计数将产生竞争条件（race condition）。 在执行python字节码时需要保证线程安全。 <a id="more"></a></p>
-<h2 id="为何选择gil作为解决方案">为何选择GIL作为解决方案</h2>
+<p>为了维护 python 变量的引用计数，该引用计数将用于垃圾收集。 同一进程内，多个解释器同时更新引用计数将产生竞争条件（race condition）。 在执行python字节码时需要保证线程安全。</p>
+<h2 id="为何python选择了gil作为解决方案">为何Python选择了GIL作为解决方案</h2>
 <ol type="1">
 <li>在操作系统还没有线程概念的时候，Python就已经出现了；</li>
 <li>能提供线程安全的内存管理（垃圾收集）；</li>
@@ -414,8 +453,26 @@
 <li><p>换用其他的py解释器。IronPython没有GIL。</p></li>
 </ol>
 <h2 id="参考">参考</h2>
-<p>https://realpython.com/python-gil/</p>
-
+<p><a href="https://realpython.com/python-gil/" target="_blank" rel="noopener" class="uri">https://realpython.com/python-gil/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -491,7 +548,7 @@
 <div id="article-share">
     
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
     
 
@@ -562,14 +619,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            动机
-\[
-\left[ \begin{array}{cc}
-A &amp; B \newline
-C &amp; D \newline
-\end{array} \right]
-=
-\left[ \begin{array}{c
+                            本文只讨论 狭义的可逆矩阵，首先必须是方阵。
+背景&amp;动机
+暴力求一个矩阵的逆，时间复杂度是\(O(n^3)\)，太高了。如果这个矩阵会随着时间越长越大，每长一次就要求一次逆，如何降低计算开销？再如果这个矩阵不光变大，还有可能缩小，又
                         
                     </div>
                     <div class="publish-info">
@@ -616,7 +668,7 @@ C &amp; D \newline
                         
                             GIL全称Python Global Interpreter Lock，全局解释器锁。
 GIL解决的问题
-为了维护 python 变量的引用计数，该引用计数将用于垃圾收集。 同一进程内，多个解释器同时更新引用计数将产生竞争条件（race
+为了维护 python 变量的引用计数，该引用计数将用于垃圾收集。 同一进程内，多个解释器同时更新引用计数将产生竞争条件（race c
                         
                     </div>
                     <div class="publish-info">
@@ -677,7 +729,7 @@ GIL解决的问题
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: One Blog<br />'
+            + '来源: 学而<br />'
             + '文章作者: Legend94rz<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
@@ -692,8 +744,6 @@ GIL解决的问题
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
@@ -813,6 +863,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
+
     <footer class="page-footer bg-color">
     
     <div class="container row center-align" style="margin-bottom: 15px !important;">
@@ -825,7 +876,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">384</span>&nbsp;字
+                class="white-color">2.1k</span>&nbsp;字
             
             
             
@@ -989,19 +1040,32 @@ $(function () {
     
 
     
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
-    
 
     
     <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    
+    
+        
+        <script>
+            
+            $(document).ready(function () {
+                $('code').each(function (i, block) {
+                    if (block.parentElement.tagName != "PRE") {
+                        
+                        block.setAttribute('style', 'display: unset; background: #f8f8f8');
+                        //console.log(block.innerText); 
+                    }
+                    hljs.highlightBlock(block);
+                })
+            })
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+        
+    
 </body>
 
 </html>

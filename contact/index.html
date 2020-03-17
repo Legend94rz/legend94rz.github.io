@@ -5,7 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="contact, MachineLearning,DeepLearning">
-    <meta name="description" content="行百里者半九十">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>contact | One Blog</title>
+    <title>contact | 学而</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -26,10 +26,36 @@
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style>.tk-source-han-sans-traditional{font-family:"source-han-sans-traditional",sans-serif;}.tk-source-han-serif-tc{font-family:"source-han-serif-tc",serif;}</style>
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif&display=swap" rel="stylesheet">
 
     <script src="/libs/jquery/jquery.min.js"></script>
     
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="One Blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/vs.min.css">
+        <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    
+
+    
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        jinrishici.load(function(result) {
+            var author = document.querySelector("#poem_author")
+            var title = document.querySelector("#poem_title")
+            var content = $('#poem_content')
+            title.innerHTML = result.data.origin.title
+            author.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author
+            full = result.data.origin.content
+            for(var i=0;i<full.length;i+=2){
+                var sent = full[i]
+                if (i+1 < full.length)
+                    sent+=full[i+1]
+                content.append("<p>"+sent+"</p>")
+            }
+        });
+    </script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="学而" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
@@ -42,7 +68,7 @@
                     
                     <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">One Blog</span>
+                    <span class="logo-span">学而</span>
                 </a>
             </div>
             
@@ -129,10 +155,10 @@
         
         <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">One Blog</div>
+        <div class="logo-name">学而</div>
         <div class="logo-desc">
             
-            行百里者半九十
+            Never really desperate, only the lost of the soul.
             
         </div>
     </div>
@@ -225,24 +251,13 @@
         <div class="brand">
             <div class="title center-align">
                 
-                subtitle
+                有朋自远方来，不亦乐乎
                 
             </div>
 
             <div class="description center-align">
                 
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: ['从来没有真正的绝境, 只有心灵的迷途','Never really desperate, only the lost of the soul'],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
+                
                 
             </div>
         </div>
@@ -266,8 +281,25 @@
                 <div class="tag-title center-align">
                     <i class="fas fa-comments"></i>&nbsp;&nbsp;留言板
                 </div>
-                
-
+                <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
         </div>
         <div class="card">
@@ -323,7 +355,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">384</span>&nbsp;字
+                class="white-color">2.1k</span>&nbsp;字
             
             
             
@@ -487,19 +519,32 @@ $(function () {
     
 
     
-    
-    <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
-    
 
     
     <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    
+    
+        
+        <script>
+            
+            $(document).ready(function () {
+                $('code').each(function (i, block) {
+                    if (block.parentElement.tagName != "PRE") {
+                        
+                        block.setAttribute('style', 'display: unset; background: #f8f8f8');
+                        //console.log(block.innerText); 
+                    }
+                    hljs.highlightBlock(block);
+                })
+            })
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+        
+    
 </body>
 
 </html>

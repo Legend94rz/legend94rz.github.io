@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>One Blog</title>
+  <title>学而</title>
   
-  
+  <subtitle>有朋自远方来，不亦乐乎</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://legend94rz.github.io/"/>
-  <updated>2020-03-16T10:33:19.041Z</updated>
+  <updated>2020-03-17T12:02:50.947Z</updated>
   <id>https://legend94rz.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://legend94rz.github.io/2020/03/15/ju-zhen-zeng-liang-shi-qiu-ni/"/>
     <id>https://legend94rz.github.io/2020/03/15/ju-zhen-zeng-liang-shi-qiu-ni/</id>
     <published>2020-03-15T04:11:42.000Z</published>
-    <updated>2020-03-16T10:33:19.041Z</updated>
+    <updated>2020-03-17T12:02:50.947Z</updated>
     
     <summary type="html">
     
@@ -29,12 +29,9 @@
       
         
         
-          &lt;h2 id=&quot;动机&quot;&gt;动机&lt;/h2&gt;
-&lt;p&gt;&lt;span class=&quot;math display&quot;&gt;\[
-\left[ \begin{array}{cc}
-A &amp;amp; B \newline
-C &amp;amp; D \newline
-\end{array}
+          &lt;p&gt;本文只讨论 &lt;strong&gt;狭义&lt;/strong&gt;的&lt;strong&gt;可逆&lt;/strong&gt;矩阵，首先必须是&lt;strong&gt;方阵&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;sec:1&quot;&gt;背景&amp;amp;动机&lt;/h2&gt;
+&lt;p&gt;暴力求一个矩阵的逆，时间复杂度是&lt;span
         
       
     
@@ -51,13 +48,19 @@ C &amp;amp; D \newline
     <link href="https://legend94rz.github.io/2020/03/15/python-de-gil/"/>
     <id>https://legend94rz.github.io/2020/03/15/python-de-gil/</id>
     <published>2020-03-15T04:10:29.000Z</published>
-    <updated>2020-03-16T10:10:11.467Z</updated>
+    <updated>2020-03-17T04:51:44.215Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;GIL全称Python Global Interpreter Lock，全局解释器锁。&lt;/p&gt;
+      
+      
+        
+        
+          &lt;p&gt;GIL全称Python Global Interpreter Lock，全局解释器锁。&lt;/p&gt;
 &lt;h2 id=&quot;gil解决的问题&quot;&gt;GIL解决的问题&lt;/h2&gt;
-&lt;p&gt;为了维护 python 变量的引用计数，该引用计数将用于垃圾收集。 同一进程内，多个解释器同时更新引用计数将产生竞争条件（race condition）。 在执行python字节码时需要保证线程安全。
+&lt;p&gt;为了维护 python 变量的引用计数，该引用计数将用于垃圾收集。
+        
+      
     
     </summary>
     

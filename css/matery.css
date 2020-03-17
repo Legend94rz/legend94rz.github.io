@@ -114,18 +114,18 @@ blockquote {
 }
 
 pre {
-    padding: 2.5rem 1.5rem 1.5rem 1.5rem !important;
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem !important;
     margin: 1rem 0 !important;
-    background: #272822;
+    /*background: #272822;
     overflow: auto;
-    border-radius: 0.35rem;
+    border-radius: 0.35rem;*/
     -moz-tab-size: 4;
       -o-tab-size: 4;
          tab-size: 4;
 }
 
 .code-area::after {
-    content: " ";
+    /*content: " ";*/
     position: absolute;
     border-radius: 50%;
     background: #ff5f56;
@@ -1128,7 +1128,7 @@ article .article-tags .chip {
     text-indent: 0.2rem;
 }
 
-#articleContent a {
+#articleContent a :not(code a) {
     padding: 0 2px;
     color: #42b983;
     font-weight: 500;
