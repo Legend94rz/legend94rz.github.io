@@ -30,6 +30,9 @@
         width: 90%;
         margin: 0 auto;
         max-width: 1250px;
+        text-shadow: 1px 1px 1px rgba(0,0,0,.004);
+        text-rendering: optimizeLegibility!important;
+        -webkit-font-smoothing: antialiased!important;
     }
 }
 
@@ -2056,4 +2059,26 @@ footer .copy-right {
     height: 50px;
     padding: 0px;
     margin: 0px;
+}
+
+.heavy-font{
+    font-weight: 900;
+}
+.bold-font{
+    font-weight: 700;
+}
+.semibold-font{
+    font-weight: 600;
+}
+.medium-font{
+    font-weight: 500;
+}
+.regular-font{
+    font-weight: 400;
+}
+.light-font{
+    font-weight: 300;
+}
+.extralight-font{
+    font-weight: 200;
 }

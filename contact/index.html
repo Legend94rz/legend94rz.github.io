@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="contact, MachineLearning,DeepLearning">
+    <meta name="keywords" content="contact, Machine Learning,Deep Learning">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>contact | 学而</title>
+    <title>contact | 學而</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -26,14 +26,11 @@
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
-    <style>.tk-source-han-sans-traditional{font-family:"source-han-sans-traditional",sans-serif;}.tk-source-han-serif-tc{font-family:"source-han-serif-tc",serif;}</style>
-    <link href="https://fonts.googleapis.com/css?family=PT+Serif&display=swap" rel="stylesheet">
 
     <script src="/libs/jquery/jquery.min.js"></script>
     
     
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/vs.min.css">
-        <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+        <link href="/libs/prism/prism.css" rel="stylesheet" />
     
 
     
@@ -45,17 +42,30 @@
             var content = $('#poem_content')
             title.innerHTML = result.data.origin.title
             author.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author
-            full = result.data.origin.content
+            var full = result.data.origin.content
+            var paras = ""
             for(var i=0;i<full.length;i+=2){
                 var sent = full[i]
                 if (i+1 < full.length)
                     sent+=full[i+1]
-                content.append("<p>"+sent+"</p>")
+                paras += "<p>"+sent+"</p>"
             }
+            content.append(paras)
         });
     </script>
     
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="学而" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    <script>
+        (function(d) {
+          var config = {
+            kitId: 'tla4fhi',
+            scriptTimeout: 3000,
+            async: true
+          },
+          h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        })(document);
+      </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="學而" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
@@ -68,7 +78,7 @@
                     
                     <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">学而</span>
+                    <span class="logo-span bold-font">學而</span>
                 </a>
             </div>
             
@@ -155,7 +165,7 @@
         
         <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">学而</div>
+        <div class="logo-name">學而</div>
         <div class="logo-desc">
             
             Never really desperate, only the lost of the soul.
@@ -249,9 +259,9 @@
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
         <div class="brand">
-            <div class="title center-align">
+            <div class="title center-align heavy-font">
                 
-                有朋自远方来，不亦乐乎
+                学而时习之
                 
             </div>
 
@@ -281,25 +291,8 @@
                 <div class="tag-title center-align">
                     <i class="fas fa-comments"></i>&nbsp;&nbsp;留言板
                 </div>
-                <script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+                
+
             </div>
         </div>
         <div class="card">
@@ -525,26 +518,9 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
-    
-    
-        
-        <script>
-            
-            $(document).ready(function () {
-                $('code').each(function (i, block) {
-                    if (block.parentElement.tagName != "PRE") {
-                        
-                        block.setAttribute('style', 'display: unset; background: #f8f8f8');
-                        //console.log(block.innerText); 
-                    }
-                    hljs.highlightBlock(block);
-                })
-            })
-        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-        
-    
+
 </body>
 
 </html>
