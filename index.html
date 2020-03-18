@@ -28,33 +28,6 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
     <script src="/libs/jquery/jquery.min.js"></script>
-    
-    
-        <link href="/libs/prism/prism.css" rel="stylesheet" />
-    
-
-    
-    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-    <script type="text/javascript">
-        jinrishici.load(function(result) {
-            var author = document.querySelector("#poem_author")
-            var title = document.querySelector("#poem_title")
-            var content = $('#poem_content')
-            title.innerHTML = result.data.origin.title
-            author.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author
-            var full = result.data.origin.content
-            var paras = ""
-            for(var i=0;i<full.length;i+=2){
-                var sent = full[i]
-                if (i+1 < full.length)
-                    sent+=full[i+1]
-                paras += "<p>"+sent+"</p>"
-            }
-            content.append(paras)
-        });
-    </script>
-    
-
     <script>
         (function(d) {
           var config = {
@@ -445,13 +418,36 @@
                     
                     
                     
-                        <div class="poetry" style='font-size: 20px;'>
-    <div class='row center-align'>
-        <span id="poem_title" class="title"></span>
-        <span id='poem_author' class='text'></span>
+                        
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        jinrishici.load(function(result) {
+            var author = document.querySelector("#poem_author")
+            var title = document.querySelector("#poem_title")
+            var content = $('#poem_content')
+            title.innerHTML = result.data.origin.title
+            author.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author
+            var full = result.data.origin.content
+            var paras = ""
+            for(var i=0;i<full.length;i+=2){
+                var sent = full[i]
+                if (i+1 < full.length)
+                    sent+=full[i+1]
+                paras += "<p style='font-size:20px;line-height: 2.0rem;'>"+sent+"</p>"
+            }
+            content.append(paras)
+        });
+    </script>
+    
+
+<div class="poetry" style='color:black;'>
+    <div class='bold-font row center-align'>
+        <span id="poem_title" class="title" style="font-size: xx-large;"></span>
+        <span id='poem_author' class='text' style="color: dimgrey;margin-left: 10px;font-size: medium;"></span>
     </div>
-    <div id="poem_content" class='text center-align'></div>
+    <div id="poem_content" class='semibold-font text center-align' style="margin-top: 20px;margin-bottom: 20px;"></div>
 </div>
+
                     
 
                     

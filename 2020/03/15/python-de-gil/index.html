@@ -28,33 +28,6 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
     <script src="/libs/jquery/jquery.min.js"></script>
-    
-    
-        <link href="/libs/prism/prism.css" rel="stylesheet" />
-    
-
-    
-    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-    <script type="text/javascript">
-        jinrishici.load(function(result) {
-            var author = document.querySelector("#poem_author")
-            var title = document.querySelector("#poem_title")
-            var content = $('#poem_content')
-            title.innerHTML = result.data.origin.title
-            author.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author
-            var full = result.data.origin.content
-            var paras = ""
-            for(var i=0;i<full.length;i+=2){
-                var sent = full[i]
-                if (i+1 < full.length)
-                    sent+=full[i+1]
-                paras += "<p>"+sent+"</p>"
-            }
-            content.append(paras)
-        });
-    </script>
-    
-
     <script>
         (function(d) {
           var config = {
@@ -856,6 +829,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
+    <link href="/libs/prism/prism.css" rel="stylesheet" />
     <script src="/libs/prism/prism.js"></script>
 
 
