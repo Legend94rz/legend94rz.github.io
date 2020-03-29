@@ -1131,7 +1131,7 @@ article .article-tags .chip {
     text-indent: 0.2rem;
 }
 
-#articleContent a :not(code a) {
+#articleContent a:not(code a) {
     padding: 0 2px;
     color: #42b983;
     font-weight: 500;
@@ -1938,7 +1938,7 @@ footer .copy-right {
     /* absolute position */
     position: absolute;
     /* set position to right bottom corner of block */
-    right: 0;
+    right: 0.2em;
     bottom: 0;
 }
 
@@ -1953,7 +1953,8 @@ footer .copy-right {
     /* set width and height */
     width: 1em;
     height: 1em;
-    margin-top: 0.2em;
+    /* fix the problem of hidden failure */
+    margin-top: 0.4em;
     /* bg color = bg color under block */
     background: white;
 }
@@ -2081,4 +2082,15 @@ footer .copy-right {
 }
 .extralight-font{
     font-weight: 200;
+}
+div:target:before {
+    margin-top:-100px;
+    content:' ';
+    display:block;
+    visibility:hidden;
+    height:100px;
+}
+
+html {
+    font-family: source-han-serif-tc,serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }

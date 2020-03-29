@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://legend94rz.github.io/"/>
-  <updated>2020-03-18T07:49:04.671Z</updated>
+  <updated>2020-03-29T05:30:07.623Z</updated>
   <id>https://legend94rz.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>簡化字整理</title>
+    <link href="https://legend94rz.github.io/2020/03/25/jian-hua-zi-zheng-li/"/>
+    <id>https://legend94rz.github.io/2020/03/25/jian-hua-zi-zheng-li/</id>
+    <published>2020-03-25T03:45:17.000Z</published>
+    <updated>2020-03-29T05:30:07.623Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本文討論1984年国家语言文字工作委员会重新发表的簡化字總表，共分三個表：第一表共收簡化字350個，第二表共收簡化字132個以及14個簡化偏旁，第三表是應用第二表所列簡化字和簡化偏旁的出來的簡化字，共1753個。合計2235個簡化字。暫不討論1984年以前的簡化方案（一簡字
+        
+      
+    
+    </summary>
+    
+    
+      <category term="漢語言" scheme="https://legend94rz.github.io/categories/%E6%BC%A2%E8%AA%9E%E8%A8%80/"/>
+    
+    
+      <category term="漢字" scheme="https://legend94rz.github.io/tags/%E6%BC%A2%E5%AD%97/"/>
+    
+  </entry>
   
   <entry>
     <title>矩阵增量式求逆</title>
