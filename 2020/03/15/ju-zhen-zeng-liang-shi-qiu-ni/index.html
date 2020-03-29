@@ -7,13 +7,22 @@
     <meta name="keywords" content="矩阵增量式求逆, Machine Learning,Deep Learning">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NXV534V88W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-NXV534V88W');
+</script>
 
 
     <title>矩阵增量式求逆 | 學而</title>
@@ -389,7 +398,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-18
+                    2020-03-29
                 </div>
                 
 
@@ -508,7 +517,13 @@
 <blockquote>
 <p>已知矩阵<span class="math inline">\(A&#39;\in\mathbb{R}^{n\times n}\)</span>是矩阵<span class="math inline">\(A\)</span>的逆，若在<span class="math inline">\(A\)</span>（以及<span class="math inline">\(A&#39;\)</span>）的左上两边各舍弃<span class="math inline">\(m\)</span>列，求<span class="math inline">\(A\)</span>剩下的子矩阵的逆。</p>
 </blockquote>
-<p>稍微多了点步骤，这相当于：已知 公式 2 的右边，删去了左上角的<span class="math inline">\(m\)</span>行/列，求<span class="math inline">\(D^{-1}\)</span>。还可以注意到： * <span class="math inline">\(A&#39;\)</span> 剩下的东西就相当于是 公式 2 右边的 <span class="math inline">\(D^{-1}+D^{-1}CEBD^{-1}\)</span> * 左边删去的相当于是<span class="math inline">\(-D^{-1}CE\)</span> * 上边删去的相当于是 <span class="math inline">\(-EBD^{-1}\)</span> * 左上角删去的是 <span class="math inline">\(E\)</span></p>
+<p>稍微多了点步骤，这相当于：已知 公式 2 的右边，删去了左上角的<span class="math inline">\(m\)</span>行/列，求<span class="math inline">\(D^{-1}\)</span>。还可以注意到：</p>
+<ul>
+<li><p><span class="math inline">\(A&#39;\)</span> 剩下的东西就相当于是 公式 2 右边的 <span class="math inline">\(D^{-1}+D^{-1}CEBD^{-1}\)</span></p></li>
+<li><p>左边删去的相当于是<span class="math inline">\(-D^{-1}CE\)</span></p></li>
+<li><p>上边删去的相当于是 <span class="math inline">\(-EBD^{-1}\)</span></p></li>
+<li><p>左上角删去的是 <span class="math inline">\(E\)</span></p></li>
+</ul>
 <p>另外把 <span class="math inline">\(D^{-1}C\)</span> 与 <span class="math inline">\(BD^{-1}\)</span> 分别看成整体，可以建立方程组求出<span class="math inline">\(D^{-1}\)</span>来：</p>
 <p><span class="math display">\[
 \begin{split}
@@ -1040,7 +1055,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
     <footer class="page-footer bg-color">
     
-    <div class="container row center-align" style="margin-bottom: 15px !important;">
+    <div class="container center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2020</span>
