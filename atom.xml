@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://legend94rz.github.io/"/>
-  <updated>2020-03-30T14:17:48.231Z</updated>
+  <updated>2022-02-12T16:19:31.368Z</updated>
   <id>https://legend94rz.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows环境下Python进程的启动过程</title>
+    <link href="https://legend94rz.github.io/2022/0213/windows-huan-jing-xia-python-jin-cheng-de-qi-dong-guo-cheng/"/>
+    <id>https://legend94rz.github.io/2022/0213/windows-huan-jing-xia-python-jin-cheng-de-qi-dong-guo-cheng/</id>
+    <published>2022-02-12T16:02:20.000Z</published>
+    <updated>2022-02-12T16:19:31.368Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;从定义一个（包含错误的）自定义进程类开始：&lt;/p&gt;
+&lt;pre class=&quot;lang-python&quot;&gt;&lt;code&gt;import multiprocessing as mp
+
+
+class MyProc(mp.Process):
+    def
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="python" scheme="https://legend94rz.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>簡化字整理</title>

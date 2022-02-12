@@ -17,7 +17,7 @@
 
     <meta name="google-site-verification" content="tKoiJ8ErWhiCF1SxxrsEqcRhFGqMdk4FBAy9va0OkqQ">
     <meta charset="utf-8">
-    <meta name="keywords" content="矩阵增量式求逆, Machine Learning,Deep Learning">
+    <meta name="keywords" content="Windows环境下Python进程的启动过程, Machine Learning,Deep Learning">
     <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +26,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>矩阵增量式求逆 | 學而</title>
+    <title>Windows环境下Python进程的启动过程 | 學而</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -253,12 +253,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">矩阵增量式求逆</h1>
+                    <h1 class="description center-align post-title">Windows环境下Python进程的启动过程</h1>
                 </div>
             </div>
         </div>
@@ -375,8 +375,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="../../../tags/math/">
-                                <span class="chip bg-color">math</span>
+                            <a href="../../../tags/python/">
+                                <span class="chip bg-color">python</span>
                             </a>
                         
                     </div>
@@ -391,28 +391,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-15
+                    2022-02-13
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-29
+                    2022-02-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    946
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    4 分
                 </div>
                 
 
@@ -428,218 +428,156 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本文只讨论 <strong>狭义</strong>的<strong>可逆</strong>矩阵，首先必须是<strong>方阵</strong>。</p>
-<h2 id="sec:1">背景&amp;动机</h2>
-<p>暴力求一个矩阵的逆，时间复杂度是<span class="math inline">\(O(n^3)\)</span>，太高了。如果这个矩阵会随着时间越长越大，每长一次就要求一次逆，如何降低计算开销？再如果这个矩阵不光变大，还有可能缩小，又如何处理？</p>
-<p>一个典型的场景是在线计算核矩阵的逆<span class="citation" data-cites="wu2017online cauwenberghs2001incremental">(Wu et al. <a href="#ref-wu2017online" role="doc-biblioref">2017</a>; Cauwenberghs and Poggio <a href="#ref-cauwenberghs2001incremental" role="doc-biblioref">2001</a>)</span>。</p>
-<h2 id="背景知识">背景知识</h2>
-<p>假设某可逆矩阵，分为<span class="math inline">\(A,B,C,D\)</span>四块，则有公式可以计算该分块矩阵的逆。按照子矩阵形状的不同，可分为如下两种情况：</p>
-<p><del>公式有点多，不要怕，真的</del></p>
-<ol type="1">
-<li><span class="math inline">\(A, D\)</span>为方阵：</li>
-</ol>
-<p><span id="eq:1"><span class="math display">\[
-\begin{align}
-    \begin{split}
-        \left[ \begin{array}{cc}
-        A &amp; B \\
-        C &amp; D \\
-        \end{array} \right]^{-1}
-        &amp;=
-        \left[ \begin{array}{cc}
-        A^{-1}+A^{-1}BFCA^{-1} &amp; -A^{-1}BF \\
-        -FCA^{-1} &amp; F \\
-        \end{array} \right]\\
-        \text{where}\qquad F&amp;=(D-CA^{-1}B)^{-1}
-    \end{split}
-\end{align}
-\qquad(1)\]</span></span></p>
-<p>公式 1 等价于：</p>
-<p><span id="eq:2"><span class="math display">\[
-\begin{align}
-    \begin{split}
-        \left[ \begin{array}{cc}
-        A &amp; B \\
-        C &amp; D \\
-        \end{array} \right]^{-1}
-        &amp;=
-        \left[ \begin{array}{cc}
-        E &amp; -EBD^{-1} \\
-        -D^{-1}CE &amp; D^{-1}+D^{-1}CEBD^{-1} \\
-        \end{array} \right]\\
-        \text{where}\qquad E&amp;=(A-BD^{-1}C)^{-1}
-    \end{split}
-\end{align}
-\qquad(2)\]</span></span></p>
-<!-- -->
-<ol start="2" type="1">
-<li><span class="math inline">\(B, C\)</span>为方阵：</li>
-</ol>
-<p><span id="eq:3"><span class="math display">\[
-\begin{align}
-    \begin{split}
-        \left[ \begin{array}{cc}
-        A &amp; B \\
-        C &amp; D \\
-        \end{array} \right]^{-1}
-        &amp;=
-        \left[ \begin{array}{cc}
-        -GDB^{-1} &amp; G \\
-        B^{-1}+B^{-1}AGDB^{-1} &amp; -BAG \\
-        \end{array} \right]\\
-        \text{where}\qquad G&amp;=(C-DB^{-1}A)^{-1}
-    \end{split}
-\end{align}
-\qquad(3)\]</span></span></p>
-<p>公式 3 也有等价形式：</p>
-<p><span id="eq:4"><span class="math display">\[
-\begin{align}
-    \begin{split}
-        \left[ \begin{array}{cc}
-        A &amp; B \\
-        C &amp; D \\
-        \end{array} \right]^{-1}
-        &amp;=
-        \left[ \begin{array}{cc}
-        -C^{-1}DH &amp; C^{-1}+C^{-1}DHAC^{-1} \\
-        H &amp; -HAC^{-1} \\
-        \end{array} \right]\\
-        \text{where}\qquad H&amp;=(B-AC^{-1}D)^{-1}
-    \end{split}
-\end{align}
-\qquad(4)\]</span></span></p>
-<h2 id="sec:3">如何做</h2>
-<p>有了上述四个公式，即可增量计算矩阵逆。举例如下：</p>
-<blockquote>
-<p>假设现在有一矩阵 <span class="math inline">\(A\in\mathbb{R}^{n\times n}\)</span>，已知其逆矩阵 <span class="math inline">\(A^{-1}\)</span>，如果：在<span class="math inline">\(A\)</span>右侧添加子矩阵<span class="math inline">\(B\in\mathbb{R}^{n\times m}\)</span>，下方添加子矩阵<span class="math inline">\(C\in\mathbb{R}^{m\times n}\)</span>，右下方添加子矩阵<span class="math inline">\(D\in\mathbb{R}^{m\times m}\)</span>，构成大矩阵 <span class="math inline">\(A&#39;\in\mathbb{R}^{(n+m)\times (n+m)}\)</span>，求<span class="math inline">\(A&#39;\)</span>的逆。</p>
-</blockquote>
-<p>这个问题是矩阵扩张的情形，可以直接应用 公式 1 解决。那么问题反过来，缩小如何解决？</p>
-<blockquote>
-<p>已知矩阵<span class="math inline">\(A&#39;\in\mathbb{R}^{n\times n}\)</span>是矩阵<span class="math inline">\(A\)</span>的逆，若在<span class="math inline">\(A\)</span>（以及<span class="math inline">\(A&#39;\)</span>）的左上两边各舍弃<span class="math inline">\(m\)</span>列，求<span class="math inline">\(A\)</span>剩下的子矩阵的逆。</p>
-</blockquote>
-<p>稍微多了点步骤，这相当于：已知 公式 2 的右边，删去了左上角的<span class="math inline">\(m\)</span>行/列，求<span class="math inline">\(D^{-1}\)</span>。还可以注意到：</p>
-<ul>
-<li><p><span class="math inline">\(A&#39;\)</span> 剩下的东西就相当于是 公式 2 右边的 <span class="math inline">\(D^{-1}+D^{-1}CEBD^{-1}\)</span></p></li>
-<li><p>左边删去的相当于是<span class="math inline">\(-D^{-1}CE\)</span></p></li>
-<li><p>上边删去的相当于是 <span class="math inline">\(-EBD^{-1}\)</span></p></li>
-<li><p>左上角删去的是 <span class="math inline">\(E\)</span></p></li>
-</ul>
-<p>另外把 <span class="math inline">\(D^{-1}C\)</span> 与 <span class="math inline">\(BD^{-1}\)</span> 分别看成整体，可以建立方程组求出<span class="math inline">\(D^{-1}\)</span>来：</p>
-<p><span class="math display">\[
-\begin{split}
-    \text{左上删去的部分} = E      \\
-    -[D^{-1}C]E = \text{左边删去的} \\
-    -E[BD^{-1}] = \text{上边删去的} \\
-    D^{-1} =  \text{剩下的} - [D^{-1}C]E[BD^{-1}]
-\end{split}
-\]</span> 把<span class="math inline">\(D^{-1}C\)</span>、<span class="math inline">\(BD^{-1}\)</span>当整体解出来，带到第4个公式里，即可得到<span class="math inline">\(D^{-1}\)</span>。</p>
-<h2 id="总结">总结</h2>
-<p>前面举例介绍了在已知矩阵的右下角新增行列时如何求逆，以及从已知矩阵的左上角删除行列时如何求逆。分别是 公式 1 正用， 公式 2 反用的情况。</p>
-<p>不难发现，公式 1-4 正着用就分别适用于已知 <span class="math inline">\(A^{-1}, D^{-1}, B^{-1}, C^{-1}\)</span>，求大矩阵的逆；而反着用就分别适用于已知大矩阵的逆，求对应剩余部分的逆的情况。当然了，这样做省时间的前提是要<span class="math inline">\(m\ll n\)</span>，不然求<span class="math inline">\(m\times m\)</span>大小的矩阵的逆也是很花时间的，得不偿失了。</p>
-<pre id="main_code" class="lang-python"><code>def inverse_enlarge(iA, B, C, D, where=&#39;TL&#39;):
+                <p>从定义一个（包含错误的）自定义进程类开始：</p>
+<pre class="lang-python"><code>import multiprocessing as mp
+
+
+class MyProc(mp.Process):
+    def __init__(self) -&gt; None:
+        super().__init__()
+        print(&#39;proc init&#39;)
+        self.unpickle = lambda x: x+2
+
+    def run(self):
+        print(&#39;subproc&#39;)
+        print(self.unpickle)
+        print(g)
+
+
+print(&#39;outside&#39;)
+if __name__ == &#39;__main__&#39;:
+    print(&#39;main&#39;)
+    g = random.random()
+    p = MyProc()
+    p.start()</code></pre>
+<p><code>MyProc()</code>
+这里执行<code>BaseProcess</code>的构造函数，做一些变量赋值之类的操作，目前还是在主进程里。<code>start</code>函数真正启动一个子进程。</p>
+<h1 id="process.start-做了什么">Process.Start() 做了什么</h1>
+<p>部分源码如下：</p>
+<pre class="lang-python"><code>class BaseProcess(object):
+    def start(self):
+        &#39;&#39;&#39;
+        Start child process
+        &#39;&#39;&#39;
+        self._check_closed()
+        assert self._popen is None, &#39;cannot start a process twice&#39;
+        assert self._parent_pid == os.getpid(), \
+               &#39;can only start a process object created by current process&#39;
+        assert not _current_process._config.get(&#39;daemon&#39;), \
+               &#39;daemonic processes are not allowed to have children&#39;
+        _cleanup()
+        self._popen = self._Popen(self)
+        self._sentinel = self._popen.sentinel
+        # Avoid a refcycle if the target function holds an indirect
+        # reference to the process object (see bpo-30775)
+        del self._target, se
+
+
+class Process(process.BaseProcess):
+    _start_method = None
+    @staticmethod
+    def _Popen(process_obj):
+        return _default_context.get_context().Process._Popen(process_obj)</code></pre>
+<p>关键即是这一句
+<code>self._popen = self._Popen(self)</code>，<code>Process</code>子类重载并实现了<code>_Popen</code>方法。在Windows平台上，context只有spawn一种，即通过WinAPI
+<code>CreateProcess</code>实现启动一个新进程。我们来看看具体是在哪儿、如何调用的。</p>
+<p>在往下看之前，先明确几个变量是干什么的：
+<code>_default_context.get_context()</code>
+这里先获得了一个<code>SpawnContext</code>对象，它只有一个比较重要的属性即<code>Process</code>。该属性是一个<code>SpawnProcess</code>对象，它是一个<code>BaseProcess</code>的子类，其中在<code>_Popen</code>方法里将实现对<code>CreateProcess</code>的调用。参数<code>process_obj</code>即来自<code>self._popen = self._Popen(self)</code>中的<code>self</code>，是自定义进程类的一个实例。</p>
+<p>涉及到的部分代码如下：</p>
+<pre class="lang-python"><code>class SpawnProcess(process.BaseProcess):
+    _start_method = &#39;spawn&#39;
+    @staticmethod
+    def _Popen(process_obj):
+        from .popen_spawn_win32 import Popen
+        return Popen(process_obj)
+
+class SpawnContext(BaseContext):
+    _name = &#39;spawn&#39;
+    Process = SpawnProcess
+
+_concrete_contexts = {
+    &#39;spawn&#39;: SpawnContext(),
+}
+
+_default_context = DefaultContext(_concrete_contexts[&#39;spawn&#39;])</code></pre>
+<p>在<code>SpawnProcess._Popen</code>里构造了一个<code>Popen</code>对象，这个对象一旦执行完构造函数，一个新进程就启动起来了。</p>
+<p>来看下<code>Popen</code>对象的构造函数：</p>
+<pre class="lang-python"><code>class Popen(object):
     &#39;&#39;&#39;
-    已知iA为某方阵A的逆，在A周围新添加BCD三块，组成新方阵。返回该新方阵的逆。
-    where: 指示iA的位置，即在大方阵的哪个角。
-    BCD的位置按照如下原则：A与B在同一行。A的对角是D。剩余的是C。A与D始终是方阵。
+    Start a subprocess to run the code of a process object
     &#39;&#39;&#39;
-    assert(iA.shape[0]==B.shape[0])
-    assert(iA.shape[1]==C.shape[1])
-    assert(D.shape[0]==C.shape[0])
-    assert(D.shape[1]==B.shape[1])
-    assert(iA.shape[0]==iA.shape[1] and D.shape[0]==D.shape[1])
-    F = np.linalg.inv(D-C@iA@B)
-    Ap = iA+iA@B@F@C@iA
-    Bp = -iA@B@F
-    Cp = -F@C@iA
-    if where == &#39;BR&#39;:
-        return np.asarray(np.bmat([[F, Cp],[Bp, Ap]]))
-    elif where == &#39;TL&#39;:
-        return np.asarray(np.bmat([[Ap, Bp],[Cp, F]]))
-    elif where == &#39;TR&#39;:
-        return np.asarray(np.bmat([[Cp, F],[Ap, Bp]]))
-    else:
-        assert(where == &#39;BL&#39;)
-        return np.asarray(np.bmat([[Bp, Ap],[F, Cp]]))
+    method = &#39;spawn&#39;
 
-def inverse_shrink(V, m, where=&#39;BR&#39;):
-    &#39;&#39;&#39;
-    已知V为某分块矩阵的逆，求某个子方阵的逆。限制：V与要求的子矩阵都必须是方阵。
-    V: 已知的逆矩阵
-    m: 返回值大小为&lt;m x m&gt;
-    where: 返回值在大矩阵的哪个角。
-    &#39;&#39;&#39;
-    assert(V.shape[0]==V.shape[1] and V.shape[0]&gt;m&gt;0)
-    if where==&#39;BR&#39;:
-        F, Cp, Bp, X = V[:-m, :-m], V[:-m, -m:], V[-m:, :-m], V[-m:, -m:]
-    elif where==&#39;TL&#39;:
-        X, Bp, Cp, F = V[:m, :m], V[:m, m:], V[m:, :m], V[m:, m:]
-    elif where==&#39;TR&#39;:
-        m = V.shape[0]-m
-        Cp, F, X, Bp = V[:m, :-m], V[:m, -m:], V[m:, :-m], V[m:, -m:]
-    else:
-        assert(where==&#39;BL&#39;)
-        m = V.shape[0]-m
-        Bp, X, F, Cp = V[:-m, :m], V[:-m, m:], V[-m:, :m], V[-m:, m:]
-    tmp = np.linalg.inv(F)
-    CiA = tmp@Cp
-    iAB = Bp@tmp
-    iA = X-iAB@F@CiA
-    return iA</code></pre>
-<p>测试代码</p>
-<pre id="test_code" class="lang-python"><code>A = np.random.randn(5,5)
-B = np.random.randn(5,1)
-C = np.random.randn(1,5)
-D = np.random.randn(1,1)
-iA = np.linalg.inv(A)
+    def __init__(self, process_obj):
+        prep_data = spawn.get_preparation_data(process_obj._name)
 
-Q = np.asarray(np.bmat( [[D, C],[B,A]] ))
-iQ = inverse_enlarge(iA, B, C, D, &#39;BR&#39;)
-print(np.allclose(iQ, np.linalg.inv(Q) ))
+        # read end of pipe will be &quot;stolen&quot; by the child process
+        # -- see spawn_main() in spawn.py.
+        rhandle, whandle = _winapi.CreatePipe(None, 0)  # 打开一个管道，分别拿到读句柄和写句柄
+        wfd = msvcrt.open_osfhandle(whandle, 0)
+        cmd = spawn.get_command_line(parent_pid=os.getpid(),
+                                     pipe_handle=rhandle)
+        cmd = &#39; &#39;.join(&#39;&quot;%s&quot;&#39; % x for x in cmd)
 
-Q = np.asarray(np.bmat( [[A, B],[C,D]] ))
-iQ = inverse_enlarge(iA, B, C, D, &#39;TL&#39;)
-print(np.allclose(iQ, np.linalg.inv(Q) ))
+        python_exe = spawn.get_executable()
 
-Q = np.asarray(np.bmat( [[B, A],[D,C]] ))
-iQ = inverse_enlarge(iA, B, C, D, &#39;TR&#39;)
-print(np.allclose(iQ, np.linalg.inv(Q) ))
+        # bpo-35797: When running in a venv, we bypass the redirect
+        # executor and launch our base Python.
+        if WINENV and _path_eq(python_exe, sys.executable):
+            python_exe = sys._base_executable
+            env = os.environ.copy()
+            env[&quot;__PYVENV_LAUNCHER__&quot;] = sys.executable
+        else:
+            env = None
 
-Q = np.asarray(np.bmat( [[C, D],[A,B]] ))
-iQ = inverse_enlarge(iA, B, C, D, &#39;BL&#39;)
-print(np.allclose(iQ, np.linalg.inv(Q) ))
+        with open(wfd, &#39;wb&#39;, closefd=True) as to_child:
+            # start process
+            try:
+                # 传入相同命令行，启动新进程，返回(新进程句柄、线程句柄、进程ID、线程ID)四元组。
+                hp, ht, pid, tid = _winapi.CreateProcess(
+                    python_exe, cmd,
+                    None, None, False, 0, env, None, None)
+                _winapi.CloseHandle(ht)
+            except:
+                _winapi.CloseHandle(rhandle)
+                raise
+
+            # set attributes of self
+            self.pid = pid
+            self.returncode = None
+            self._handle = hp
+            self.sentinel = int(hp)
+            self.finalizer = util.Finalize(self, _winapi.CloseHandle, (self.sentinel,))
+
+            # send information to child
+            set_spawning_popen(self)
+            try:
+                reduction.dump(prep_data, to_child)
+                # 以Pickle的方式，把自定义进程中的属性通过写管道发送给子进程。
+                reduction.dump(process_obj, to_child)
+            finally:
+                set_spawning_popen(None)</code></pre>
+<h1 id="一个正确的自定义进程">一个正确的自定义进程</h1>
+<p>可以看到，spawn方式启动不像fork那样，而是新启动一个进程，这个新进程并不会执行在<code>if __name__ == '__main__'</code>包围下的代码，因此全局变量<code>g</code>不会被管道发送；同时，<code>MyProc.unpickle</code>属性是一个lambda表达式，它是不能被序列化的，因此无法被发送到子进程。程序会执行失败。修改后的代码如下：</p>
+<pre class="lang-python"><code>import multiprocessing as mp
 
 
-A = np.random.randn(1,1)
-B = np.random.randn(1,5)
-C = np.random.randn(5,1)
-D = np.random.randn(5,5)
+class MyProc(mp.Process):
+    def __init__(self) -&gt; None:
+        super().__init__()
+        print(&#39;proc init&#39;)
 
-iQ = np.linalg.inv(np.asarray(np.bmat( [[A, B],[C,D]] )))
-iD = inverse_shrink(iQ, 5, &#39;BR&#39;)
-print(np.allclose(iD, np.linalg.inv(D)))
+    def run(self):
+        print(&#39;subproc&#39;)
 
-iQ = np.linalg.inv(np.asarray(np.bmat( [[D, C],[B,A]] )))
-iD = inverse_shrink(iQ, 5, &#39;TL&#39;)
-print(np.allclose(iD, np.linalg.inv(D)))
 
-iQ = np.linalg.inv(np.asarray(np.bmat( [[C, D],[A,B]] )))
-iD = inverse_shrink(iQ, 5, &#39;TR&#39;)
-print(np.allclose(iD, np.linalg.inv(D)))
-
-iQ = np.linalg.inv(np.asarray(np.bmat( [[B, A],[D,C]] )))
-iD = inverse_shrink(iQ, 5, &#39;BL&#39;)
-print(np.allclose(iD, np.linalg.inv(D)))</code></pre>
-<h2 id="参考文献">参考文献</h2>
-<div id="refs" class="references hanging-indent" role="doc-bibliography">
-<p><a href="https://www.zhihu.com/question/47760591" target="_blank" rel="external nofollow noopener noreferrer">知乎：如何求一个矩阵的逆</a></p>
-<p><a href="http://www.cs.ubbcluj.ro/~csatol/SOGP/thesis/Iterative_computation.html" target="_blank" rel="external nofollow noopener noreferrer" class="uri">http://www.cs.ubbcluj.ro/~csatol/SOGP/thesis/Iterative_computation.html</a></p>
-<div id="ref-cauwenberghs2001incremental">
-<p>Cauwenberghs, Gert, and Tomaso Poggio. 2001. “Incremental and Decremental Support Vector Machine Learning.” In <em>Advances in Neural Information Processing Systems</em>, 409–15.</p>
-</div>
-<div id="ref-wu2017online">
-<p>Wu, Chung-Hao, Wei-Chen His, Henry Horng-Shing Lu, and Hsueh-Ming Hang. 2017. “Online Multiclass Passive-Aggressive Learning on a Fixed Budget.” In <em>2017 Ieee International Symposium on Circuits and Systems (Iscas)</em>, 1–4. IEEE.</p>
-</div>
-</div>
+print(&#39;outside&#39;)
+if __name__ == &#39;__main__&#39;:
+    print(&#39;main&#39;)
+    g = random.random()
+    p = MyProc()
+    p.start()</code></pre>
 
             </div>
             <hr>
@@ -703,8 +641,8 @@ print(np.allclose(iD, np.linalg.inv(D)))</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="../../../tags/math/">
-                                    <span class="chip bg-color">math</span>
+                                <a href="../../../tags/python/">
+                                    <span class="chip bg-color">python</span>
                                 </a>
                             
                         </div>
@@ -750,7 +688,7 @@ print(np.allclose(iD, np.linalg.inv(D)))</code></pre>
         repo: 'legend94rz.github.io',
         owner: 'legend94rz',
         admin: "legend94rz",
-        id: '2020-03-15T12-11-42',
+        id: '2022-02-13T00-02-20',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -773,9 +711,62 @@ print(np.allclose(iD, np.linalg.inv(D)))</code></pre>
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../0325/jian-hua-zi-zheng-li/">
+                <a href>
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Windows环境下Python进程的启动过程">
+                        
+                        <span class="card-title">Windows环境下Python进程的启动过程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            从定义一个（包含错误的）自定义进程类开始：
+import multiprocessing as mp
+
+
+class MyProc(mp.Process):
+    def __init__(self) -&gt; None:
+
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Legend94rz
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="../../../2020/0325/jian-hua-zi-zheng-li/">
                     <div class="card-image">
                         
                         
@@ -791,9 +782,9 @@ print(np.allclose(iD, np.linalg.inv(D)))</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -811,53 +802,6 @@ print(np.allclose(iD, np.linalg.inv(D)))</code></pre>
                     
                     <a href="../../../tags/%E6%BC%A2%E5%AD%97/">
                         <span class="chip bg-color">漢字</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="../python-de-gil/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Python的GIL">
-                        
-                        <span class="card-title">Python的GIL</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            GIL全称Python Global Interpreter Lock，全局解释器锁。
-GIL解决的问题
-为了维护 python 变量的引用计数，该引用计数将用于垃圾收集。 同一进程内，多个解释器同时更新引用计数将产生竞争条件（race
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-15
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Legend94rz
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="../../../tags/python/">
-                        <span class="chip bg-color">python</span>
                     </a>
                     
                 </div>
@@ -1030,21 +974,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-    
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-        <script>
-            MathJax = {
-              tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-              },
-              svg: {
-                fontCache: 'global'
-              }
-            };
-        </script>
-    
-    
 
 
 
